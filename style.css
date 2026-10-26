@@ -6,10 +6,18 @@
     box-sizing: border-box;
 }
 body{
-    font-family: Roboto, Noto, sans-serif;
-    font-size: 16px;
+    font-family: Roboto, Arial, sans-serif;
+    font-size: 14px;
     color: white;
     background-color: #0F0F0F;
+    color-scheme: dark;
+}
+
+button,
+input,
+select,
+textarea{
+    font: inherit;
 }
 .nav-bar{
     display: flex;
@@ -18,16 +26,22 @@ body{
     width: 100%;
     padding: 0 16px;
     height: 56px;
-    margin-top:10px;
+    margin: 10px 0;
     position: sticky;
     top: 0;
+    z-index: 10;
     background-color: #0f0f0f;
     color: white;
 }
 .nav-bar button{
-    font-size: 1.5rem;
+    font-size: 14px;
     color: white;
     background-color: #222222;
+    height: 60px;
+}
+
+.nav-bar button .material-icons{
+    font-size: 24px;
 }
 
 
@@ -47,21 +61,17 @@ body{
     font-size: 2rem;
     color: white;
 }
-.youtube-logo{
-    height: 40px;
-    max-width: 90px;
-    object-fit: contain;
-    object-position: left center;
+.nav-bar #logo-icon {
+    display: block;
+    width: 93px;
+    height: 20px;
+    flex-shrink: 0;
+    margin-right: 20px;
 }
 .search-bar{
     display: flex;
     width: 100%;
     max-width: 650px;
-}
-.search-bar #voice-search{
-    margin-left: 20px;
-    border: none;
-    border-radius: 100px;
 }
 
 .search-div{
@@ -69,11 +79,10 @@ body{
     align-items: center;
     width: 100%;
     border: 1px solid lightgray;
-    border-radius: 6px;
+    border-radius: 50px;
     background-color: #0F0F0F;
     margin-left: 20px;
     margin-top: 10px;
-    
     
 }
 
@@ -81,32 +90,50 @@ body{
     flex: 1;
     max-width: 650px;
     border: none;
+    border-radius: 50px;
     outline: none;
     padding-left: 15px;
     font-size: 16px;
-    color: black;
+    color: #f1f1f1;
     height: 40px;
     background-color: #0F0F0F;
     
 }
-.search-div button{
+
+/* .search{
     display: flex;
-    align-items: center;
-    justify-content: center;
     height: 40px;
-    border: 1px solid lightgray;    
+    margin-top: 10px;
+    border-radius: 50px 0 50px 0;
+} */
+
+.search #search-btn{
     border-radius: 50px;
-    background-color: #222222;
-    border-left:none;
-    color: white;
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
 }
-.middle{
-    padding: 15px;
-}
+
 .search-div #search-btn{
     border: none;
     display: flex;
 }
+
+.search-bar #voice-search{
+    margin-left: 20px;
+    border: none;
+    border-radius: 100px;
+    margin-top: 10px;
+}
+
+.search-bar
+.middle{
+    padding: 15px;
+}
+
+.middle i{
+    height: 0px;
+}
+
 
 .create {
     display: flex;
@@ -116,27 +143,48 @@ body{
 
 .create button{
     padding: 8px 12px;
-    border-radius: 20px;
+    border-radius: 40px;
     border: none;
     cursor: pointer;
+    padding: 20px;
+}
+
+.create .theme-toggle{
+    display: grid;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    place-items: center;
+}
+
+.search-empty{
+    padding: 32px;
+    color: #aaa;
+    text-align: center;
 }
 .create-text{
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 5px;
 }
 
+
+
+
+
 main{
     display: flex;
+    height: calc(100vh - 56px);
 }
 .side-panel-section{
     width: 320px;
     flex-shrink: 0;
     border-right: 1px solid #272727;
     background-color: #0F0F0F;
-    height: calc(100vh - 56px);
+    height: 100%;
     overflow-y: scroll;
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     white-space: nowrap;
     /* I added nowrap because the text was overlapping on to the next line */
 }
@@ -187,7 +235,7 @@ h4{
 
 .sub-btn{
     align-self: flex-start;
-    font-size: 16px;
+    font-size: 14px;
     background: none;
     color: white;
     border: none;
@@ -202,7 +250,7 @@ span i:hover{
 }
 
 .footer-section span{
-  font-size: 1rem;
+  font-size: 12px;
   font-weight: 500;
   margin-right: 5px;
   color: rgb(96, 96, 96);
@@ -216,10 +264,75 @@ span i:hover{
 .videos{
     background-color: #0F0F0F;
     display: flex;
+    flex-direction: column;
     flex: 1;
     overflow-y: scroll;
-    height: calc(100vh - 56px);
-    margin: 10px 0;
+    height: 100%;
+    margin: 0;
+    min-width: 0;
+}
+
+.topic-bar{
+    position: sticky;
+    top: 0;
+    z-index: 5;
+    display: flex;
+    align-items: center;
+    flex: 0 0 48px;
+    margin: 5px 0;
+    min-width: 0;
+    overflow: hidden;
+    background-color: #0F0F0F;
+}
+
+.topic-list{
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    width: 100%;
+    padding: 0 16px;
+    overflow-x: auto;
+    scrollbar-width: none;
+}
+
+.topic-list::-webkit-scrollbar{
+    display: none;
+}
+
+.topic-chip{
+    flex: 0 0 auto;
+    height: 36px;
+    padding: 0 16px;
+    border: 0;
+    border-radius: 8px;
+    background-color: #272727;
+    color: #f1f1f1;
+    font: 500 14px Roboto, Arial, sans-serif;
+    white-space: nowrap;
+    cursor: pointer;
+}
+
+.topic-chip:hover{
+    background-color: #3f3f3f;
+}
+
+.topic-chip.is-selected{
+    background-color: #f1f1f1;
+    color: #0f0f0f;
+}
+
+.topic-next{
+    position: absolute;
+    top: 4px;
+    right: 0;
+    display: grid;
+    width: 40px;
+    height: 40px;
+    place-items: center;
+    border-radius: 50%;
+    background: linear-gradient(90deg, transparent, #0f0f0f 28%);
+    color: #f1f1f1;
+    pointer-events: none;
 }
 
 .side-panel-section,
@@ -251,6 +364,39 @@ span i:hover{
   /* grow: 0 (don't grow), shrink: 1 (shrink if necessary) basis is manually calculated so that on a laptop screen, 3 videos fit */
   background-color: #0f0f0f;
   border-radius: 8px;
+  transition: background-color 180ms ease;
+}
+
+[hidden]{
+    display: none !important;
+}
+
+.video-div:hover{
+  background-color: var(--thumbnail-hover-color);
+}
+
+.black-hover{
+  --thumbnail-hover-color: #292929;
+}
+
+.yellow-hover{
+  --thumbnail-hover-color: #51491b;
+}
+
+.green-hover{
+  --thumbnail-hover-color: #21432e;
+}
+
+.red-hover{
+  --thumbnail-hover-color: #4b2525;
+}
+
+.blue-hover{
+  --thumbnail-hover-color: #20374f;
+}
+
+.pink-hover{
+  --thumbnail-hover-color: #4a2b40;
 }
 
 .video-image {
@@ -278,7 +424,7 @@ span i:hover{
 }
 .video-title {
     flex: 1;
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 500;
     color: white;
     margin: 5px 0;
@@ -323,5 +469,111 @@ span i:hover{
 @media (max-width: 600px) {
     .video-div {
         flex-basis: 100%;
+    }
+
+    html[data-theme="light"] body,
+    html[data-theme="light"] .nav-bar,
+    html[data-theme="light"] .side-panel-section,
+    html[data-theme="light"] .videos,
+    html[data-theme="light"] .topic-bar{
+        color: #0f0f0f;
+        background-color: #fff;
+    }
+
+    html[data-theme="light"] body{
+        color-scheme: light;
+    }
+
+    html[data-theme="light"] .nav-bar button,
+    html[data-theme="light"] .create button,
+    html[data-theme="light"] .topic-chip{
+        color: #0f0f0f;
+        background-color: #f2f2f2;
+    }
+
+    html[data-theme="light"] .search-div,
+    html[data-theme="light"] .search-div input{
+        color: #0f0f0f;
+        background-color: #fff;
+    }
+
+    html[data-theme="light"] .search-div{
+        border-color: #c6c6c6;
+    }
+
+    html[data-theme="light"] .search-div input{
+        color-scheme: light;
+    }
+
+    html[data-theme="light"] .topic-chip:hover,
+    html[data-theme="light"] .icon-item:hover,
+    html[data-theme="light"] .sub-btn:hover{
+        background-color: #e5e5e5;
+    }
+
+    html[data-theme="light"] .topic-chip.is-selected{
+        color: #fff;
+        background-color: #0f0f0f;
+    }
+
+    html[data-theme="light"] .topic-next{
+        color: #0f0f0f;
+        background: linear-gradient(90deg, transparent, #fff 28%);
+    }
+
+    html[data-theme="light"] .video-title,
+    html[data-theme="light"] .sub-btn{
+        color: #0f0f0f;
+    }
+
+    html[data-theme="light"] .video-div{
+        background-color: #fff;
+    }
+
+    html[data-theme="light"] .video-channel,
+    html[data-theme="light"] .video-views,
+    html[data-theme="light"] .search-empty{
+        color: #606060;
+    }
+
+    html[data-theme="light"] .footer-section span{
+        color: #606060;
+    }
+
+    html[data-theme="light"] .side-panel-section{
+        border-color: #e5e5e5;
+    }
+
+    html[data-theme="light"] .categories{
+        border-color: #e5e5e5;
+    }
+
+    html[data-theme="light"] .side-panel-section,
+    html[data-theme="light"] .videos{
+        scrollbar-color: #c6c6c6 #fff;
+    }
+
+    html[data-theme="light"] .black-hover{
+        --thumbnail-hover-color: #e5e5e5;
+    }
+
+    html[data-theme="light"] .yellow-hover{
+        --thumbnail-hover-color: #fff4bf;
+    }
+
+    html[data-theme="light"] .green-hover{
+        --thumbnail-hover-color: #d9f0df;
+    }
+
+    html[data-theme="light"] .red-hover{
+        --thumbnail-hover-color: #f8dddd;
+    }
+
+    html[data-theme="light"] .blue-hover{
+        --thumbnail-hover-color: #dceafb;
+    }
+
+    html[data-theme="light"] .pink-hover{
+        --thumbnail-hover-color: #f5e0ee;
     }
 }
